@@ -42,7 +42,7 @@ const Profile = () => {
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error.message);
       });
   }, [dispatch, router.state.loginid, router.state.type]);
 

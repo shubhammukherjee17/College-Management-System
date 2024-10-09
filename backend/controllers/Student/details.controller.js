@@ -1,4 +1,5 @@
 const studentDetails = require("../../models/Students/details.model.js")
+const uploadImage = require("../../services/cloudinaryService.js")
 
 const getDetails = async (req, res) => {
     try {
@@ -31,7 +32,18 @@ const addDetails = async (req, res) => {
                 message: "Student With This Enrollment Already Exists",
             });
         }
-        user = await studentDetails.create({ ...req.body, profile: req.file.filename });
+        let imageUrl = '';
+
+        if (req.file) {
+            try {
+                console.log(req.file);
+                imageUrl = await uploadImage(req.file);
+            } catch (error) {
+                return res.status(500).json({ message: 'Error uploading image to Cloudinary', error: error.message });
+            }
+        }
+         
+        user = await studentDetails.create({ ...req.body, profile: imageUrl });
         const data = {
             success: true,
             message: "Student Details Added!",

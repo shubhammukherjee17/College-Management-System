@@ -1,27 +1,16 @@
-const multer = require("multer");
-const path = require("path");
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "./media");
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'uploads',
+        format: async (req, file) => 'png',
+        public_id: (req, file) => `${Date.now()}-${file.originalname}`,
     },
-    filename: function (req, file, cb) {
-        let filename = ""
-        if (req.body?.type === "timetable") {
-            filename = `Timetable_${req.body.semester}_Semester_${req.body.branch}.png`
-        } else if (req.body?.type === "profile") {
-            if (req.body.enrollmentNo) {
-                filename = `Student_Profile_${req.body.enrollmentNo}_Semester_${req.body.branch}.png`
-            } else {
-                filename = `Faculty_Profile_${req.body.employeeId}.png`
-            }
-        } else if (req.body?.type === "material") {
-            filename = `${req.body.title}_Subject_${req.body.subject}.pdf`
-        }
-        cb(null, `${filename}`);
-    }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 module.exports = upload;
