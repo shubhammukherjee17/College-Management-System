@@ -61,11 +61,10 @@ const Marks = () => {
         {external && (
           <div className="w-1/2 shadow-md p-4">
             <p className="border-b-2 border-red-500 text-2xl font-semibold pb-2">
-              External Marks (Out of 60)
+              External Marks (Out of 70)
             </p>
             <div className="mt-5">
               {Object.keys(external).map((item, index) => {
-                console.log(external);
                 return (
                   <div
                     key={index}
