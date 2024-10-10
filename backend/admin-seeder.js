@@ -11,17 +11,17 @@ const seedData = async () => {
         await adminDetails.deleteMany({})
 
         await adminCredential.create({
-            loginid: 8989,
+            loginid: 1,
             password: "admin123"
         });
 
         const adminDetail = {
-            employeeId: "01",
+            employeeId: "1",
             firstName: "Shubham",
-            middleName: " ",
+            middleName: "",
             lastName: "Mukherjee",
             email: "mukherjeeshubham18@gmail.com",
-            phoneNumber: "1234567890",
+            phoneNumber: "123456789",
             gender: "Male",
             type: "Admin",
             profile: "http://icongal.com/gallery/image/212948/admin_administrator_user_person_customer_face.png",
