@@ -12,7 +12,7 @@ cloudinary.config({
 const uploadImage = async (file) => {
     try {
         const result = await cloudinary.uploader.upload(file.path, {
-            folder: 'auctions',
+            folder: 'images',
         });
         return result.secure_url;
     } catch (error) {

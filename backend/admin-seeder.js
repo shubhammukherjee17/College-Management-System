@@ -24,7 +24,7 @@ const seedData = async () => {
             phoneNumber: "1234567890",
             gender: "Male",
             type: "Admin",
-            profile: "Shubham.jpg",
+            profile: "http://icongal.com/gallery/image/212948/admin_administrator_user_person_customer_face.png",
         };
 
         await adminDetails.create(adminDetail);
