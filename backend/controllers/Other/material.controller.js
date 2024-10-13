@@ -1,4 +1,5 @@
 const Material = require("../../models/Other/material.model");
+const uploadImage = require("../../services/cloudinaryService.js")
 
 const getMaterial = async (req, res) => {
     try {
@@ -17,10 +18,22 @@ const getMaterial = async (req, res) => {
 
 const addMaterial = async (req, res) => {
     let { faculty, subject, title } = req.body;
+    
+    let imageUrl = '';
+
+        if (req.file) {
+            try {
+                console.log(req.file);
+                imageUrl = await uploadImage(req.file);
+            } catch (error) {
+                return res.status(500).json({ message: 'Error uploading image to Cloudinary', error: error.message });
+            }
+        }
+
     try {
         await Material.create({
             faculty,
-            link: req.file.filename,
+            link: imageUrl,
             subject,
             title,
         });
