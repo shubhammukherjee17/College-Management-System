@@ -19,6 +19,7 @@ const AddStudent = () => {
     branch: "",
     gender: "",
   });
+  
   const getBranchData = () => {
     const headers = {
       "Content-Type": "application/json",
